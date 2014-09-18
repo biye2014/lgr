@@ -40,7 +40,7 @@ def lattice_build_bigram(word_list, lines_of_sentences):
 
                         if False: print 'CCurrent_word IS A WORD!'
 
-                        previous_word_start_index = None
+                        previous_word_start_index = 'Null'
                         previous_word = '#START#'
                         # backward_bigram_table[0]={(previous_word_start_index, current_word_start_index, previous_word, current_word)}
                         backward_bigram_table[0] = {previous_word_start_index: (previous_word, current_word)}
@@ -82,6 +82,9 @@ def lattice_build_bigram(word_list, lines_of_sentences):
 
             backward_bigram_lattice.append(backward_bigram_table)
 
+
+        lattice_list.append((forward_unigram_lattice,backward_bigram_lattice))
+
         #
         # ---> code for checking forward_lattice backward_bigram_lattice should be placed here
             #
@@ -112,31 +115,36 @@ def lattice_build_bigram(word_list, lines_of_sentences):
                 print '##-## current_start, current_end, current_word = ', index2, index + 1, u"".join(
                     sent[index2:index + 1])
                 for index3 in backward_bigram_table[index2]:
-                    # print index3
-                    #print 'bigram=', u" _/_ ".join(backward_bigram_table[index2][index3])
-                    print 'p_start, current_start, current_end,  previous_word, current_word==>', index3, index2 \
-                        , index + 1, u"-".join(backward_bigram_table[index2][index3]), "(check=", u"".join(
-                        sent[index3:index2]), u"".join(sent[index2:index + 1]), ')'
+                    print index3
+                    print 'bigram=', u" _/_ ".join(backward_bigram_table[index2][index3])
+                    print 'p_start, current_start, current_end,  previous_word, current_word==>', index3, index2\
+                        , index + 1, u"-".join(backward_bigram_table[index2][index3])
+
+                    if type(index3) is int:
+                        print "(check=", u"".join(sent[index3:index2]), u"".join(sent[index2:index + 1]), ')'
+                    elif type(index3) is str:
+                        print "(check=", u"".join(sent[index2:index + 1]), ')'
 
 
 
 
 
         print 'length of forward_lattice=', len(forward_unigram_lattice), '; len of backward_lattice=', len(
-            backward_bigram_lattice)
+            backward_bigram_lattice), "  len of b[0]=", len(backward_bigram_lattice[0]), type(backward_bigram_lattice[0]), len(backward_bigram_lattice[1])
 
-        lattice_list.append((forward_unigram_lattice, backward_bigram_lattice))
+
+
+    print "!!!!!"
 
     return lattice_list
-
 
 
 lines_of_sent = [u"材 料 利 用 率 高".split()]  # with and without special symbol for start/end of sentence
 
 word_list = [u'材料', u'利用', u'利用率', u'率', u'高']
 
-lattice_list=lattice_build_bigram(word_list, lines_of_sent)
-
+lattice =lattice_build_bigram(word_list, lines_of_sent)
+forward_unigram_lattice, backward_bigram_lattice = lattice[0]
 
 '''
 print "\n"*3, ">>> Display backward_bigram_lattice's content <<<"
