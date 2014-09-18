@@ -42,7 +42,8 @@ def lattice_build_bigram(word_list, lines_of_sentences):
 
                         previous_word_start_index = None
                         previous_word = '#START#'
-                        backward_bigram_table[0]={(previous_word_start_index, current_word_start_index, previous_word, current_word)}
+                        # backward_bigram_table[0]={(previous_word_start_index, current_word_start_index, previous_word, current_word)}
+                        backward_bigram_table[0] = {previous_word_start_index: (previous_word, current_word)}
 
                         if False:
                             print 'end_index, previous_word, current_word==>', current_word_start_index, previous_word, current_word
@@ -52,7 +53,8 @@ def lattice_build_bigram(word_list, lines_of_sentences):
 
                 elif current_word in word_list:
 
-                    set_of_bigram_tuples=set()
+                    # set_of_bigram_tuples=set()
+                    dict_index2bigram = {}
 
                     if False:
                         print '>current word IS A WORD!'
@@ -67,33 +69,27 @@ def lattice_build_bigram(word_list, lines_of_sentences):
                         previous_word = u"".join(sent[previous_word_start_index: current_word_start_index])
 
                         if previous_word in word_list:
-                            set_of_bigram_tuples.add((previous_word_start_index, current_word_start_index, previous_word, current_word))
+                            # set_of_bigram_tuples.add((previous_word_start_index, current_word_start_index, previous_word, current_word))
+                            dict_index2bigram[previous_word_start_index] = (previous_word, current_word)
 
                             print 'p_start, current_start, previous_word, current_word==>', previous_word_start_index \
                                 , current_word_start_index, previous_word, current_word, "(check=", \
                                 u"".join(sent[previous_word_start_index:current_word_start_index]), u"".join(
                                 sent[current_word_start_index:current_word_end_index]), ')'
 
-                    backward_bigram_table[current_word_start_index]= set_of_bigram_tuples
+                    # backward_bigram_table[current_word_start_index]= set_of_bigram_tuples
+                    backward_bigram_table[current_word_start_index] = dict_index2bigram
 
             backward_bigram_lattice.append(backward_bigram_table)
 
         #
         # ---> code for checking forward_lattice backward_bigram_lattice should be placed here
+            #
+
+
         #
-
-        print 'length of forward_lattice=', len(forward_unigram_lattice), '; len of backward_lattice=', len(
-            backward_bigram_lattice)
-
-        lattice_list.append((forward_unigram_lattice, backward_bigram_lattice))
-
-    return lattice_list
-
-'''
-
-#
-# Code for checking foward_word_lattice and backward_bigram_lattice for a sentence
-#
+        # Code for checking foward_word_lattice and backward_bigram_lattice for a sentence
+        #
         #
         # check forward_word_lattice
         #
@@ -115,11 +111,24 @@ def lattice_build_bigram(word_list, lines_of_sentences):
             for index2 in backward_bigram_table:
                 print '##-## current_start, current_end, current_word = ', index2, index + 1, u"".join(
                     sent[index2:index + 1])
-                for p_start, c_start, previous_word, current_word in backward_bigram_table[index2]:
-                    print 'p_start, current_start, current_end,  previous_word, current_word==>', p_start, c_start, index + 1, previous_word, current_word, "(check=", u"".join(
-                        sent[p_start:c_start]), u"".join(sent[c_start:index + 1]), ')'
+                for index3 in backward_bigram_table[index2]:
+                    # print index3
+                    #print 'bigram=', u" _/_ ".join(backward_bigram_table[index2][index3])
+                    print 'p_start, current_start, current_end,  previous_word, current_word==>', index3, index2 \
+                        , index + 1, u"-".join(backward_bigram_table[index2][index3]), "(check=", u"".join(
+                        sent[index3:index2]), u"".join(sent[index2:index + 1]), ')'
 
-'''
+
+
+
+
+        print 'length of forward_lattice=', len(forward_unigram_lattice), '; len of backward_lattice=', len(
+            backward_bigram_lattice)
+
+        lattice_list.append((forward_unigram_lattice, backward_bigram_lattice))
+
+    return lattice_list
+
 
 
 lines_of_sent = [u"材 料 利 用 率 高".split()]  # with and without special symbol for start/end of sentence
