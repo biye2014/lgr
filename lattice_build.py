@@ -98,21 +98,26 @@ def f_lattice_display(f_lattice):
             print '\t', j, "".join(table[j])
 
 
-print '\n????'
-
-sent = u"材 料 利 用 率 高".split()
-print " - ".join(sent)
-
-word_list = [u'材料', u'利用', u'利用率', u'率', u'高']
-
-max_word_len = 3
-dummy_start = '$START#'
-
-forward_unigram_lattice, backward_bigram_lattice = gen_lattice(word_list, sent, max_word_len, dummy_start)
-
-b_lattic_display(backward_bigram_lattice)
-f_lattice_display(forward_unigram_lattice)
+#print '\n????'
 
 
+def test():
+
+    sent = u"材 料 利 用 率 高".split()
+    print " - ".join(sent)
+
+    word_list = [u'材料', u'利用', u'利用率', u'率', u'高']
+
+    max_word_len = 3
+    dummy_start = '$START#'
+
+    forward_unigram_lattice, backward_bigram_lattice = gen_lattice(word_list, sent, max_word_len, dummy_start)
+
+
+    b_lattic_display(backward_bigram_lattice)
+    f_lattice_display(forward_unigram_lattice)
+
+
+test()
 
 
