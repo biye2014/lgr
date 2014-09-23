@@ -104,6 +104,7 @@ def viterbi_search(backward_lattice, max_word_len):
 def test():
     from lattice_build import gen_lattice
 
+    print '\n=== Running viterbi Search Test...'
 
     sent = u"材 料 利 用 率 高".split()
     word_list = [u'材料', u'利用', u'利用率', u'率', u'高']

@@ -103,6 +103,8 @@ def f_lattice_display(f_lattice):
 
 def test():
 
+    print '\n====Running Lattice Build Test====='
+
     sent = u"材 料 利 用 率 高".split()
     print " - ".join(sent)
 
