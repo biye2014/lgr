@@ -1,6 +1,0 @@
-#
-# generate features from word-bigram and their context
-#
-
-def feature_gen(bigram, left_char_ngram, right_char_ngram):
-    pass
