@@ -22,13 +22,13 @@ def feature_gen(previous_word, word, incoming_char):
     p_word_end = previous_word[-1]
     p_word_begin = previous_word[0]
 
-
-    #
-    # --> here!
-    #
     word_len_str = u"".join(str(len(word)))
+    p_word_len_str=u"".join(str(len(previous_word)))
+
+
     p_word_len_str = u"".join(str(len(previous_word)))
 
     base_feature_str = [word, u"_".join(previous_word, word), f3, u"_".join(word[0], word_len_str), \
-                        u"".join(word[-1], word_len_str), u"_".join(w - 1[-1])]
-    #unitl f6
+                        u"".join(word[-1], word_len_str)]
+
+
