@@ -46,6 +46,7 @@ def feature_gen(previous_word, word, incoming_char):
         base_feature_list.append(u"f3_"+f3)
 
 
+    #============> We'll skip the word structure features at the moment
 
     ############
     # Group A feature: head_char to substitute begin/end char of word
