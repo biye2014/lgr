@@ -46,6 +46,9 @@ def feature_gen(previous_word, word, incoming_char):
         base_feature_list.append(u"f3_"+f3)
 
 
+    return base_feature_list
+
+
     #============> We'll skip the word structure features at the moment
 
     ############

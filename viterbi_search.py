@@ -13,15 +13,13 @@ def bigram_score(tuple_of_word):
 
 
 def score_it (score_model, bigram, incoming_char):
-    return -1.0
-'''
+    #return -1.0
+
     previous_word, current_word = bigram
     feature= feature_gen (previous_word, current_word, incoming_char)
     print "feature:", u" ".join(feature)
-    score = len(score_model+feature)
-
+    score = - len(score_model+u"".join(feature))
     return score
-'''
 
 
 
@@ -78,7 +76,7 @@ def viterbi_search(score_model, backward_lattice, sent, max_word_len):
             else:
                 #j>0  cached_bigram is a dict of dict such that cached_bigram[j][k] maps to bigram (sent[k:j], sent[j:i])
 
-                best_score = min(best_partial_combination[j][k][0] for k in best_partial_combination[j]) - 1
+                best_score = -1e10
                 best_tracer = None
 
                 print '??? Initial best_score, best_tracer=', best_score, best_tracer
@@ -125,7 +123,7 @@ def viterbi_search(score_model, backward_lattice, sent, max_word_len):
 
         while k > 0:
             best_index_seq.insert(0, k)
-            k = last_word_start = best_partial_combination[j][k][1]
+            k = best_partial_combination[j][k][1]
         best_index_seq.insert(0, 0)
 
         print best_index_seq
