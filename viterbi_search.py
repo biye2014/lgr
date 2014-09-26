@@ -11,7 +11,14 @@ def bigram_score(tuple_of_word):
     return 1.0
 
 
+def score(previous_word, current_word, incoming_char):
+    return 1.0
+
+
 def viterbi_search(backward_lattice, max_word_len):
+
+
+
     display_flag = False
 
     if display_flag: print "start viterbi search..."
