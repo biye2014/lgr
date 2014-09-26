@@ -16,8 +16,7 @@ Procedure:
 
 
 '''
-import codecs
-import multiprocessing
+import codecs, sys, multiprocessing
 
 from lattice_build import gen_lattice, b_lattic_display
 from feature_gen import feature_gen
@@ -186,9 +185,9 @@ def main(path_to_corpus, path_to_instance_file, num_proc):
     dummy_start, dummy_end = u'$START#', u'$END#'
     print "\n\n==== Generating instances for training scoring function ===="
 
-    print len(corpus)
+    #print len(corpus)
 
-    extend_corpus = [(sent, word_list, max_word_len, dummy_start, dummy_end) for sent in corpus[:2000]]
+    extend_corpus = [(sent, word_list, max_word_len, dummy_start, dummy_end) for sent in corpus]
 
     pool = multiprocessing.Pool(num_proc)
 
@@ -204,7 +203,7 @@ def main(path_to_corpus, path_to_instance_file, num_proc):
 
 
 
-main('../working_data/train.ctb5.seg', '../working_data/tmp.out', 4)
+
 
 #TODO check the result!
 def test():
@@ -229,3 +228,10 @@ def test():
 
 
 #test()
+#main('../working_data/train.ctb5.seg', '../working_data/tmp.out', 4)
+
+if __name__=='__main__':
+    print '\n>>>> Running gen_ins_to_train_score_model'
+    print 'This program generates instances to train scoring model of lattice-based segmentation system...'
+    print '\n @Arg: 1.training_corpus(segmented), 2. path_to_resulting_instances, 3.num_of_processes '
+    main(sys.argv[1], sys.argv[2], int(sys.argv[3]))
