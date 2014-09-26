@@ -82,8 +82,8 @@ def gen_instance_by_traversal_lattice(valid_state, backward_lattice, sent, dummy
                 feature = feature_gen(cached_bigram[0], incoming_char)
                 instance.append((label, feature))
 
-                if display_flag: print '\t## label/bigram=', label, u"-".join(cached_bigram[0]), 'feature=', u"/".join(
-                    feature)
+                if display_flag: print '\t## label/bigram/incoming_char=', label, u"-".join(cached_bigram[0]) \
+                    , incoming_char, 'feature=', u"/".join(feature)
 
             else:
 
@@ -97,8 +97,8 @@ def gen_instance_by_traversal_lattice(valid_state, backward_lattice, sent, dummy
                     feature = feature_gen(bigram, incoming_char)
                     instance.append((label, feature))
 
-                    if display_flag: print '\t\tk=', k, 'label/bigram=', label, u"-".join(
-                        bigram), 'feature=', u"/".join(feature)
+                    if display_flag: print '\t\tk=', k, 'label/bigram/incoming_char=', label, u"-".join(
+                        bigram), incoming_char, 'feature=', u"/".join(feature)
 
     return instance
 
@@ -107,12 +107,13 @@ def test():
     word_set = [u'材料', u'利用', u'利用率', u'率', u'高']
 
     word_seq = [u'材料', u'利用率', u'高']
+
     raw_sent = u"".join(word_seq)
 
     max_word_len = 3
     dummy_start, dummy_end = u'$START#', u'$END#'
 
-    f_lattice, b_lattice = gen_lattice(word_seq, raw_sent, max_word_len, dummy_start)
+    f_lattice, b_lattice = gen_lattice(word_set, raw_sent, max_word_len, dummy_start)
 
     b_lattic_display(b_lattice)
 
@@ -120,6 +121,7 @@ def test():
 
     instance = gen_instance_by_traversal_lattice(valid_state, b_lattice, raw_sent, dummy_end)
 
+    print '\n\n=====  Display all instances ====='
     for i in instance:
         print i[0], u"/".join(i[1])
 

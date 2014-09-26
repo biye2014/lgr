@@ -10,7 +10,8 @@ __author__ = 'jma'
 # generate features from word-bigram and their context
 #
 
-def feature_gen(previous_word, word, incoming_char):
+def feature_gen(bigram, incoming_char):
+    previous_word, word = bigram[0], bigram[1]
 
     ##################
     # base_feature: 13 base features are from word-based CWS, Zhang & Clark (2011)
@@ -45,8 +46,7 @@ def feature_gen(previous_word, word, incoming_char):
     if f3:
         base_feature_list.append(u"f3_"+f3)
 
-
-    return base_feature_list
+    return tuple(base_feature_list)
 
 
     #============> We'll skip the word structure features at the moment
@@ -63,10 +63,10 @@ def feature_gen(previous_word, word, incoming_char):
 def test_base_feature():
 
     for p_word, word, incoming_char in [(u"中国", u"民众们", u"站"), (u"我们", u"和", u"敌")]:
-        f_list=feature_gen(p_word, word, incoming_char)
+        f_list = feature_gen((p_word, word), incoming_char)
         print "\np_word, word, char are: ", p_word, word, incoming_char, "  , then features are:"
         for feature in f_list:
             print feature
 
 
-test_base_feature()
+            # test_base_feature()

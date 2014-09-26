@@ -14,24 +14,21 @@ def bigram_score(tuple_of_word):
 
 def score_it (score_model, bigram, incoming_char):
     #return -1.0
-
-    previous_word, current_word = bigram
-    feature= feature_gen (previous_word, current_word, incoming_char)
+    feature = feature_gen(bigram, incoming_char)
     print "feature:", u" ".join(feature)
     score = - len(score_model+u"".join(feature))
     return score
 
 
-
-def get_incoming_char(sent, sent_index):
-
+def get_incoming_char(sent, sent_index, dummy_end):
+    # dummy_end = u"$END#"
     if sent_index < len(sent):
         return sent[sent_index]
     else:
-        return u"$END#"
+        return dummy_end
 
 
-def viterbi_search(score_model, backward_lattice, sent, max_word_len):
+def viterbi_search(score_model, backward_lattice, sent, dummy_end):
 
 
     display_flag = True
@@ -54,7 +51,7 @@ def viterbi_search(score_model, backward_lattice, sent, max_word_len):
 
     for i in range(1, lattice_len + 1):
 
-        incoming_char = get_incoming_char(sent, i)
+        incoming_char = get_incoming_char(sent, i, dummy_end)
 
         if display_flag:  print '\n\ni=', i
 
@@ -139,13 +136,14 @@ def test():
     sent = u"材 料 利 用 率 高".split()
     word_list = [u'材料', u'利用', u'利用率', u'率', u'高']
     max_word_len = 3
-    dummy_start = '#'
+    dummy_start = u'$START#'
+    dummy_end = u"$END#"
 
     forward_lattice, backward_lattice = gen_lattice(word_list, sent, max_word_len, dummy_start)
 
     scoring_model = u'I am a model'
 
-    best_index_seq = viterbi_search(scoring_model, backward_lattice, sent, max_word_len)
+    best_index_seq = viterbi_search(scoring_model, backward_lattice, sent, dummy_end)
 
     x = best_index_seq[:-1]
     y = best_index_seq[1:]
