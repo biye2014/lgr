@@ -1,6 +1,7 @@
 __author__ = 'jma'
 # encoding=utf-8
 
+
 def gen_lattice(word_list, sent, max_word_len, dummy_start):
 
     if not type(word_list) is set:
@@ -120,6 +121,6 @@ def test():
     f_lattice_display(forward_unigram_lattice)
 
 
-test()
+#test()
 
 
