@@ -195,7 +195,7 @@ def main(path_to_corpus, path_to_instance_file, num_proc):
     pool.close()
     pool.join()
 
-    print type(list_of_groups)
+    #print type(list_of_groups)
 
     instance_list = [instance for group in list_of_groups for instance in group]
 
