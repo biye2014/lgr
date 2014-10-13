@@ -12,11 +12,13 @@ def bigram_score(tuple_of_word):
     return 1.0
 
 
-def score_it (score_model, bigram, incoming_char):
+def score_it(bigram, incoming_char):
     #return -1.0
+
     feature = feature_gen(bigram, incoming_char)
     print "feature:", u" ".join(feature)
-    score = - len(score_model+u"".join(feature))
+    score = - len(u"".join(feature))
+
     return score
 
 
@@ -28,7 +30,7 @@ def get_incoming_char(sent, sent_index, dummy_end):
         return dummy_end
 
 
-def viterbi_search(score_model, backward_lattice, sent, dummy_end):
+def viterbi_search(score_function, backward_lattice, sent, dummy_end):
 
 
     display_flag = True
@@ -64,11 +66,12 @@ def viterbi_search(score_model, backward_lattice, sent, dummy_end):
 
             # j==0  cached_bigram is a dict, key=index value: (dummy_start_word, sent[j:i])
             if j == 0:
-                best_score = best_partial_combination[0] + score_it(score_model, cached_bigram[0], incoming_char)
+                best_score = best_partial_combination[0] + score_function(cached_bigram[0], incoming_char)
                 best_seq[j] = (best_score, 0)
 
                 if display_flag: print '\tSPECIAL partial_score, bigram_score=', best_partial_combination[0] \
-                    , score_it(score_model, cached_bigram[0], incoming_char), 'final_score=', best_score, 'bigram=', "-".join(cached_bigram[0])
+                    , score_function(cached_bigram[0], incoming_char), 'final_score=', best_score, 'bigram=', "-".join(
+                    cached_bigram[0])
 
             else:
                 #j>0  cached_bigram is a dict of dict such that cached_bigram[j][k] maps to bigram (sent[k:j], sent[j:i])
@@ -82,9 +85,10 @@ def viterbi_search(score_model, backward_lattice, sent, dummy_end):
 
                     bigram = cached_bigram[j][k]
 
-                    score = best_partial_combination[j][k][0] + score_it(score_model, bigram, incoming_char)
+                    score = best_partial_combination[j][k][0] + score_function(bigram, incoming_char)
 
-                    if display_flag: print '\t\tk=', k, 'bigram/partial score=', "-".join(bigram), score_it(score_model, bigram, incoming_char), \
+                    if display_flag: print '\t\tk=', k, 'bigram/partial score=', "-".join(bigram), score_function(
+                        bigram, incoming_char), \
                         best_partial_combination[j][k][0], ' Final score=', score
 
                     if score > best_score:
@@ -141,16 +145,22 @@ def test():
 
     forward_lattice, backward_lattice = gen_lattice(word_list, sent, max_word_len, dummy_start)
 
-    scoring_model = u'I am a model'
+    # scoring_model = u'I am a model'
 
-    best_index_seq = viterbi_search(scoring_model, backward_lattice, sent, dummy_end)
+    best_index_seq = viterbi_search(score_it, backward_lattice, sent, dummy_end)
 
     x = best_index_seq[:-1]
     y = best_index_seq[1:]
     z = zip(x, y)
     for index1, index2 in z:
         print forward_lattice[index1][index2]
+        print "*".join(sent[index1:index2])
         # print "".join(sent[index1:index2])
+
+        #print "new print"
+
+
+
 
 
 test()
