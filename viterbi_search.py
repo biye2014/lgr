@@ -124,7 +124,7 @@ def viterbi_search(score_function, backward_lattice, sent, dummy_end):
 
         while k > 0:
             best_index_seq.insert(0, k)
-            k = best_partial_combination[j][k][1]
+            k, j = best_partial_combination[j][k][1], k
         best_index_seq.insert(0, 0)
 
         print best_index_seq
