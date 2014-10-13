@@ -16,7 +16,9 @@ Procedure:
 
 
 '''
-import codecs, sys, multiprocessing
+import codecs
+import sys
+import multiprocessing
 
 from lattice_build import gen_lattice, b_lattic_display
 from feature_gen import feature_gen
@@ -202,10 +204,6 @@ def main(path_to_corpus, path_to_instance_file, num_proc):
     write_instance_and_stat(instance_list, path_to_instance_file)
 
 
-
-
-
-#TODO check the result!
 def test():
     word_set = [u'材料', u'利用', u'利用率', u'率', u'高']
 
@@ -227,7 +225,7 @@ def test():
         print i[0], u"/".join(i[1])
 
 
-#test()
+test()
 #main('../working_data/train.ctb5.seg', '../working_data/tmp.out', 4)
 
 if __name__=='__main__':
