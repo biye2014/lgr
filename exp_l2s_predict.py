@@ -21,6 +21,7 @@ import codecs
 from lattice_build import gen_lattice  # b_lattic_display
 from viterbi_search import viterbi_search
 from feature_gen import feature_gen
+
 # from exp_l2s_gen_ins_to_train_score_model import gen_valid_state, gen_instance_by_traversal_lattice
 
 from maxent import MaxentModel  # need python interface of Zhang Le's maxent package
@@ -162,7 +163,7 @@ def test1():
     path_corpus = "../working_data/test.ctb5.seg"
     path_me_model = "../working_data/train.set1.i100.model"
     path_to_lexicon = "../working_data/train_testPredict.dict"
-    path_to_output = "../working_data/test.ctb5.seg.l2s"    
+    path_to_output = "../working_data/test.ctb5.seg.l2s"
 
     main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
 
@@ -170,7 +171,6 @@ def test1():
 def test1_2():
     print "Running test1_2, i.e. experiment Setting 1.2"
 
-    
     path_corpus = "../working_data/test.ctb5.seg"
     path_me_model = "../working_data/train.set1.i100.model"
     path_to_lexicon = "../working_data/testPredict.dict"
@@ -183,27 +183,35 @@ def test1_2():
 def test2_1():
     print "Running test2_2, i.e. experiment Setting 2.1"
 
-    
     path_corpus = "../working_data/test.ctb5.seg"
     path_me_model = "../working_data/train.set1.i100.model"
     path_to_lexicon = "../working_data/test_crf_wordhood.dict"
     path_to_output = "../working_data/test.ctb5.seg.l2s.2.1"
-    
+
     main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
-    
+
 
 def test2_2():
 
     print "Running test2_2, i.e. experiment Setting 2.2"
 
-    
     path_corpus = "../working_data/test.ctb5.seg"
     path_me_model = "../working_data/train.set1.i100.model"
     path_to_lexicon = "../working_data/train_test_crf_wordhood.dict"
     path_to_output = "../working_data/test.ctb5.seg.l2s.22"
-    
+
     main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
-    
+
+
+def test_fine():
+    print "Running fine, i.e. experiment Setting 2.2"
+
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/train_crf_wordhood.fine.dict"
+    path_to_output = "../working_data/test.ctb5.seg.fine"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
 
 
 #test()
