@@ -31,9 +31,7 @@ def get_incoming_char(sent, sent_index, dummy_end):
 
 
 def viterbi_search(score_function, backward_lattice, sent, dummy_end):
-
-
-    display_flag = True
+    display_flag = False
 
     if display_flag: print "start viterbi search..."
 
@@ -79,7 +77,7 @@ def viterbi_search(score_function, backward_lattice, sent, dummy_end):
                 best_score = -1e10
                 best_tracer = None
 
-                print '??? Initial best_score, best_tracer=', best_score, best_tracer
+                if display_flag: print '??? Initial best_score, best_tracer=', best_score, best_tracer
 
                 for k in cached_bigram[j]:
 
@@ -127,7 +125,10 @@ def viterbi_search(score_function, backward_lattice, sent, dummy_end):
             k, j = best_partial_combination[j][k][1], k
         best_index_seq.insert(0, 0)
 
-        print best_index_seq
+        if display_flag: print best_index_seq
+
+    else:
+        print "Fail!"
 
     return best_index_seq
 
@@ -160,10 +161,7 @@ def test():
         #print "new print"
 
 
-
-
-
-test()
+# test()
 
 
 

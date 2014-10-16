@@ -42,7 +42,7 @@ class ScoreModel(MaxentModel):
         return math.log(raw_score, 10)
 
 
-def test():
+def test_single_sent():
     #parameters
     max_word_len = 15
     dummy_start, dummy_end = u'$START#', u'$END#'
@@ -94,14 +94,9 @@ def test():
     print '\nSegmented sent=', u" ".join(segmented)
 
 
-def main():
+def main(path_corpus, path_me_model, path_to_lexicon, path_to_output):
     max_word_len = 12
     dummy_start, dummy_end = u'$START#', u'$END#'
-
-    path_corpus = "../working_data/test.ctb5.seg"
-    path_me_model = "../working_data/train.set1.i80.model"
-    path_to_lexicon = "../working_data/train_testPredict.dict"
-    path_to_output = "../working_data/test.ctb5.seg.l2s"
 
 
     #
@@ -154,7 +149,7 @@ def main():
         print '\nSegmented sent=', u" ".join(segmented)
         segmented_corpus.append(u" ".join(segmented))
 
-    print "\nSegmentation done, writing it to file"
+    print "\nSegmentation done, writing it to file", path_to_output, '...'
     with codecs.open(path_to_output, 'w', 'utf-8') as f:
         for sent in segmented_corpus:
             f.write(sent + u'\n')
@@ -163,6 +158,55 @@ def main():
     print "Program exit."
 
 
+def test1():
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/train_testPredict.dict"
+    path_to_output = "../working_data/test.ctb5.seg.l2s"    
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test1_2():
+    print "Running test1_2, i.e. experiment Setting 1.2"
+
+    
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/testPredict.dict"
+    path_to_output = "../working_data/test.ctb5.seg.l2s.1.2"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+
+def test2_1():
+    print "Running test2_2, i.e. experiment Setting 2.1"
+
+    
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/test_crf_wordhood.dict"
+    path_to_output = "../working_data/test.ctb5.seg.l2s.2.1"
+    
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+    
+
+def test2_2():
+
+    print "Running test2_2, i.e. experiment Setting 2.2"
+
+    
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/train_test_crf_wordhood.dict"
+    path_to_output = "../working_data/test.ctb5.seg.l2s.22"
+    
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+    
+
+
 #test()
-main()
+#test1_2()
+#test2_1()
 ##TODO  code to handle "fail to segment" error (make each char a possible word)
