@@ -22,6 +22,7 @@ from lattice_build import gen_lattice  # b_lattic_display
 from viterbi_search import viterbi_search
 from feature_gen import feature_gen
 
+
 # from exp_l2s_gen_ins_to_train_score_model import gen_valid_state, gen_instance_by_traversal_lattice
 
 from maxent import MaxentModel  # need python interface of Zhang Le's maxent package
@@ -204,7 +205,7 @@ def test2_2():
 
 
 def test_fine():
-    print "Running fine, i.e. experiment Setting 2.2"
+    print "Running fine, i.e. experiment with .fine (30i) merge-action prediciton model"
 
     path_corpus = "../working_data/test.ctb5.seg"
     path_me_model = "../working_data/train.set1.i100.model"
@@ -214,7 +215,173 @@ def test_fine():
     main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
 
 
+def test_fine50():
+    print "Running fine, i.e. experiment with .fine.50i merge-action prediction model"
+
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/train_crf_wordhood.fine.50i.dict"
+    path_to_output = "../working_data/test.ctb5.seg.fine50"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_fine100():
+    print "Running fine, i.e. experiment with /fine.100i merge-action prediciton model"
+
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/train_crf_wordhood.fine.100i.dict"
+    path_to_output = "../working_data/test.ctb5.seg.fine100"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_fine15():
+    print "Running fine, i.e. experiment with /fine.15i merge-action prediciton model"
+
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/train_crf_wordhood.fine.15i.dict"
+    path_to_output = "../working_data/test.ctb5.seg.fine15"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_fine8():
+    print "Running fine, i.e. experiment with /fine.8i merge-action prediciton model"
+
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/train_crf_wordhood.fine.8i.dict"
+    path_to_output = "../working_data/test.ctb5.seg.fine8"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_fine2():
+    print "Running fine 2i..."
+
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/train_crf_wordhood.fine.2i.dict"
+    path_to_output = "../working_data/test.ctb5.seg.fine2"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_merge():
+    print "Running fine, i.e. experiment with /exp.merge/model.merge.o16"
+
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../exp.merge/o16.train.crf.dict"
+    path_to_output = "../exp.merge/test.ctb5.seg.o16"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_merge15():
+    print "Running fine, i.e. experiment with /exp.merge/model.merge.o16.i15"
+
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../exp.merge/o16.15i.train.crf.dict"
+    path_to_output = "../exp.merge/test.ctb5.seg.o16.15i"
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_merge100():
+    print "Running fine, i.e. experiment with /exp.merge/model.merge.o16.100i"
+
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../exp.merge/o16.100i.train.crf.dict"
+    path_to_output = "../exp.merge/test.ctb5.seg.o16.100i"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_group():
+    print "Running fine, i.e. experiment with /exp.merge.group/model.merge.group.o16"
+
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../exp.merge.group/all.o16.train.crf.dict"
+    path_to_output = "../exp.merge.group/test.ctb5.seg.group"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_group_i15():
+    print "Running fine, i.e. experiment with /exp.merge.group/model.merge.group.o16.i15"
+
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../exp.merge.group/all.biye.group.i15.dict"
+    path_to_output = "../exp.merge.group/test.ctb5.seg.group.i15"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_group_no_train():
+    print "Running fine, i.e. experiment with /exp.merge.group/model.merge.group.o16"
+
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../exp.merge.group/group.crf.dict"
+    path_to_output = "../exp.merge.group/test.ctb5.seg.group.no_train"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_base():
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../exp.base/test.ctb5.segwp.model.dict"
+    path_to_output = "../exp.base/test.ctb5.seg.base"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_base50():
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../exp.base/test.ctb5.segwp.model.i50.dict"
+    path_to_output = "../exp.base/test.ctb5.seg.base.i50"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_base100():
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../exp.base/test.ctb5.segmodel.wp.i100.dict"
+    path_to_output = "../exp.base/test.ctb5.seg.base.i00"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
 #test()
 #test1_2()
 #test2_1()
-##TODO  code to handle "fail to segment" error (make each char a possible word)
+
+def test_base100_no_train():
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../exp.base/i100.crf.dict"
+    path_to_output = "../exp.base/test.ctb5.seg.base.i00"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+# #TODO  code to handle "fail to segment" error (make each char a possible wor
+if __name__ == '__main__':
+    #test_merge()
+    #test_merge100()
+    #test_merge15()
+    test_group_no_train()
+    #test_base()
+    #test_base50()
+    #test_base100_no_train()
+
