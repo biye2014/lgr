@@ -23,6 +23,7 @@ from viterbi_search import viterbi_search
 from feature_gen import feature_gen
 
 
+
 # from exp_l2s_gen_ins_to_train_score_model import gen_valid_state, gen_instance_by_traversal_lattice
 
 from maxent import MaxentModel  # need python interface of Zhang Le's maxent package
@@ -375,13 +376,84 @@ def test_base100_no_train():
     main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
 
 
+def test_a2_100():
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/a2.i100.crf.dict"
+    path_to_output = "../working_data/a2.i100.seg"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_a2_150():
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/a2.i150.crf.dict"
+    path_to_output = "../working_data/a2.i150.seg"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_a2_200():
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/a2.i200.crf.dict"
+    path_to_output = "../working_data/a2.i200.seg"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_a2_100_nobase():
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/a2.nobase.100i.crf.dict"
+    path_to_output = "../working_data/a2.nobase.i100.seg"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_bichar_extend_150():
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/bichar.crf.e.i150.dict"
+    path_to_output = "../working_data/bichar.e.i150.seg"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_bichar_150():
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/bichar.crf.i150.dict"
+    path_to_output = "../working_data/bichar.i150.seg"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
+def test_crf():
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/test.crf.dict"
+    path_to_output = "../working_data/test.crf.seg"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
 # #TODO  code to handle "fail to segment" error (make each char a possible wor
 if __name__ == '__main__':
     #test_merge()
     #test_merge100()
     #test_merge15()
-    test_group_no_train()
+    # test_group_no_train()
     #test_base()
     #test_base50()
     #test_base100_no_train()
+
+    # test_a2_100()
+    #test_a2_150()
+    #test_a2_200()
+    #test_crf()
+    #test_a2_100_nobase()
+    test_bichar_extend_150()
+    test_bichar_150()
 
