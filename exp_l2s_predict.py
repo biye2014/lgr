@@ -24,6 +24,7 @@ from feature_gen import feature_gen
 
 
 
+
 # from exp_l2s_gen_ins_to_train_score_model import gen_valid_state, gen_instance_by_traversal_lattice
 
 from maxent import MaxentModel  # need python interface of Zhang Le's maxent package
@@ -430,6 +431,15 @@ def test_bichar_150():
     main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
 
 
+def test_bichar_e2_150():
+    path_corpus = "../working_data/test.ctb5.seg"
+    path_me_model = "../working_data/train.set1.i100.model"
+    path_to_lexicon = "../working_data/bichar.e2.crf.i150.dict"
+    path_to_output = "../working_data/bichar.e2.i150.seg"
+
+    main(path_corpus, path_me_model, path_to_lexicon, path_to_output)
+
+
 def test_crf():
     path_corpus = "../working_data/test.ctb5.seg"
     path_me_model = "../working_data/train.set1.i100.model"
@@ -454,6 +464,7 @@ if __name__ == '__main__':
     #test_a2_200()
     #test_crf()
     #test_a2_100_nobase()
-    test_bichar_extend_150()
-    test_bichar_150()
+    # test_bichar_extend_150()
+    #test_bichar_150()
+    test_bichar_e2_150()
 
